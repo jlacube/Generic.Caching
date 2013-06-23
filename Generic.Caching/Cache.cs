@@ -7,6 +7,36 @@ namespace Generic.Caching
 {
     public class Cache : ICache
     {
-        
+
+        public object Get(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Get(string key, string region)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool Contains(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(string key, string region)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(string key, string region)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
