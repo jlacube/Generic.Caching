@@ -2,18 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Generic.Caching
 {
-    public class Cache : ICache
+    public class Cache<TType> : ICache<TType>
     {
+		ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();
+		private Dictionary<string,TType> internalCache = new Dictionary<string, TType>();
 
-        public object Get(string key)
+        public TType Get(string key)
         {
-            throw new NotImplementedException();
+			cacheLock.EnterReadLock();
+
+			try
+			{
+				TType result = default(TType);
+				internalCache.TryGetValue(key, out result);
+
+				return result;
+			}
+			finally
+			{
+				cacheLock.ExitReadLock();
+			}
         }
 
-        public object Get(string key, string region)
+        public TType Get(string key, string region)
         {
             throw new NotImplementedException();
         }

@@ -8,12 +8,12 @@ namespace Generic.Caching
 {
     public class CacheManager : ICacheManager
     {
-        ICache ICacheManager.InitializeCache<TType, TProvider>(TProvider objectProvider)
+        ICache<TType> ICacheManager.InitializeCache<TType, TProvider>(TProvider objectProvider)
         {
             return null;
         }
 
-        ICache ICacheManager.InitializeCache<TType>()
+        ICache<TType> ICacheManager.InitializeCache<TType>()
         {
             return null;
         }

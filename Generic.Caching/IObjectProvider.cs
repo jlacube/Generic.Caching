@@ -8,6 +8,6 @@ namespace Generic.Caching
 {
     interface IObjectProvider<TType>
     {
-        TType GetItem(string key);
+        TType LoadItem(string key);
     }
 }

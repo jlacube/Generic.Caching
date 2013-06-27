@@ -7,7 +7,7 @@ namespace Generic.Caching
 {
     interface ICacheManager
     {
-        ICache InitializeCache<TType, TProvider>(TProvider objectProvider);
-        ICache InitializeCache<TType>();
+        ICache<TType> InitializeCache<TType, TProvider>(TProvider objectProvider);
+        ICache<TType> InitializeCache<TType>();
     }
 }
