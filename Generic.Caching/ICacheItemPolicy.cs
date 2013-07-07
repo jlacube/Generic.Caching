@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Generic.Caching
 {
-    interface ICacheItemPolicy
+    public interface ICacheItemPolicy
     {
     }
 }

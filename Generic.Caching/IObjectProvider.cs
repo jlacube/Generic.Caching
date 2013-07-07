@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Generic.Caching
 {
-    interface IObjectProvider<TType>
+    public interface IObjectProvider<TType>
     {
         TType LoadItem(string key);
     }
