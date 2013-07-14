@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generic.Caching.ConsoleTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCacheConsoleTest", "NetCacheConsoleTest\NetCacheConsoleTest.csproj", "{03C3D31E-E5B5-496A-A96D-48B3A2158198}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generic.Caching.Tests", "Generic.Caching.Tests\Generic.Caching.Tests.csproj", "{CA00407A-C740-4552-816B-AC537349B5DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{B0DBCE4F-EA6D-4079-93D0-77C012B8E069}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0DBCE4F-EA6D-4079-93D0-77C012B8E069}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0DBCE4F-EA6D-4079-93D0-77C012B8E069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA00407A-C740-4552-816B-AC537349B5DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA00407A-C740-4552-816B-AC537349B5DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA00407A-C740-4552-816B-AC537349B5DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA00407A-C740-4552-816B-AC537349B5DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Generic.Caching.ConsoleTest\Generic.Caching.ConsoleTest.csproj

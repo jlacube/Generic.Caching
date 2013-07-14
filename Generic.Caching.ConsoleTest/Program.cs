@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Diagnostics;
 using Generic.Caching;
+using Generic.Caching.Interfaces;
 
 namespace Generic.Caching.ConsoleTest
 {
 	class MainClass
 	{        
-		private static ICacheType<string> cache = new Cache<string>();
+		private static ICache<string> cache = new Cache<string>();
 		private static string allowedChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789!@$?_-";
-		private static int counter = 0;
-		private static readonly object locker = new object();
 
 		static string CreateRandomString(int passwordLength, int idx)
 		{            
@@ -25,7 +24,7 @@ namespace Generic.Caching.ConsoleTest
 			return new string(chars);
 		}
 
-		private static void CacheAccessTes()
+		private static void CacheAccessTest()
 		{
 			int span = 5;
 			string key;
@@ -36,12 +35,9 @@ namespace Generic.Caching.ConsoleTest
 			int index = 0;
 			List<string> keys = new List<string>();
 
-			lock (locker)
-			{
-				counter++;
-			}
-
 			cont = itens;
+
+			insertSynchro.WaitOne ();
 
 			//populates it with data in the cache
 			do
@@ -56,6 +52,10 @@ namespace Generic.Caching.ConsoleTest
 				cont--;
 			}
 			while (cont > 0);
+
+			insertDoneSynchro.Release ();
+
+			readSynchro.WaitOne ();
 
 			cont = interactions;
 			index = 0;
@@ -79,32 +79,63 @@ namespace Generic.Caching.ConsoleTest
 			while (cont > 0);
 			stopWatch.Stop();
 
-			lock (locker)
-			{
-				counter--;
-			}
+			readDoneSynchro.Release ();
 
 			string outstring = String.Format("[{0}] number of interactions {1} : {2} milliseconds", Thread.CurrentThread.ManagedThreadId, interactions, stopWatch.ElapsedMilliseconds );
 			Console.WriteLine(outstring);
+
+			deleteSynchro.WaitOne ();
+
+			cont = itens-1;
+
+			//populates it with data in the cache
+			do
+			{
+				cache.Remove(keys[cont]);
+
+				cont--;
+			}
+			while (cont > 0);
+
+			deleteDoneSynchro.Release ();
 		}
+
+		const int NB_THREADS = 2;
+
+		public static ManualResetEvent insertSynchro = new ManualResetEvent (false);
+		public static ManualResetEvent readSynchro = new ManualResetEvent (false);
+		public static ManualResetEvent deleteSynchro = new ManualResetEvent (false);
+
+		public static Semaphore insertDoneSynchro = new Semaphore (0, NB_THREADS);
+		public static Semaphore readDoneSynchro = new Semaphore (0, NB_THREADS);
+		public static Semaphore deleteDoneSynchro = new Semaphore (0, NB_THREADS);
 
 		static void Main(string[] args)
 		{
-			for (int threads = 0; threads < 2; threads++)
+			List<Thread> threads = new List<Thread> (NB_THREADS);
+
+			for (int i = 0; i < NB_THREADS; ++i)
 			{
-				Thread thread = new Thread(new ThreadStart(CacheAccessTes));
-				thread.Start();
+				Thread thread = new Thread(new ThreadStart(CacheAccessTest));
+				threads.Add (thread);
+				thread.Start ();
 			}
 
-			Thread.Sleep(1000);
+			insertSynchro.Set ();
 
-			while (true)
-			{
-				lock (locker)
-				{
-					if (counter == 0) break;
-				}
-				Thread.Sleep(100);
+			for (int i = 0; i < NB_THREADS; ++i) insertDoneSynchro.WaitOne ();
+
+			readSynchro.Set ();
+
+			for (int i = 0; i < NB_THREADS; ++i) readDoneSynchro.WaitOne ();
+
+			deleteSynchro.Set ();
+
+			for (int i = 0; i < NB_THREADS; ++i) deleteDoneSynchro.WaitOne ();
+
+
+			foreach (Thread thread in threads) {
+				thread.Join ();
 			}
 
 			Console.WriteLine("End of test.");

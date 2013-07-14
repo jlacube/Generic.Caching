@@ -41,12 +41,20 @@
   <ItemGroup>
     <Compile Include="Cache.cs" />
     <Compile Include="CacheManager.cs" />
-    <Compile Include="ICache.cs" />
-    <Compile Include="ICacheItem.cs" />
-    <Compile Include="ICacheItemPolicy.cs" />
-    <Compile Include="ICacheManager.cs" />
-    <Compile Include="IObjectProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CacheItem.cs" />
+    <Compile Include="Interfaces\ICacheItemRefreshAction.cs" />
+    <Compile Include="Interfaces\ICacheItemExpiration.cs" />
+    <Compile Include="Interfaces\ICache.cs" />
+    <Compile Include="Interfaces\ICacheManager.cs" />
+    <Compile Include="Interfaces\IObjectProvider.cs" />
+    <Compile Include="Expirations\AbsoluteTime.cs" />
+    <Compile Include="Expirations\ExtendedFormat.cs" />
+    <Compile Include="Expirations\ExtendedFormatTime.cs" />
+    <Compile Include="Expirations\FileDependency.cs" />
+    <Compile Include="Expirations\NeverExpired.cs" />
+    <Compile Include="Expirations\SlidingTime.cs" />
+    <Compile Include="Properties\Resources.Designer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -56,4 +64,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Expirations\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Resources.resx" />
+  </ItemGroup>
 </Project>

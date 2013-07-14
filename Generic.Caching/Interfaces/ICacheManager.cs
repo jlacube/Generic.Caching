@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Generic.Caching
+namespace Generic.Caching.Interfaces
 {
     interface ICacheManager
     {

@@ -1,16 +1,6 @@
 ﻿<Properties GitUserInfo="UsingGIT">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Generic.Caching/Cache.cs">
-    <Files>
-      <File FileName="Generic.Caching/ICache.cs" Line="31" Column="40" />
-      <File FileName="Generic.Caching/ICacheItemPolicy.cs" Line="1" Column="1" />
-      <File FileName="Generic.Caching/ICacheItem.cs" Line="1" Column="1" />
-      <File FileName="Generic.Caching/IObjectProvider.cs" Line="11" Column="36" />
-      <File FileName="Generic.Caching/Cache.cs" Line="12" Column="15" />
-      <File FileName="Generic.Caching/ICacheManager.cs" Line="8" Column="22" />
-      <File FileName="Generic.Caching/CacheManager.cs" Line="20" Column="3" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workbench />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
